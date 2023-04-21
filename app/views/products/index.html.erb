@@ -1,0 +1,38 @@
+<div class="container justify-content-center mt-5 text-center w-50">
+  <div style="height:400px; overflow:auto;">
+    <% if current_user.present? %>
+      <table class="table table-bordered container table-hover table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @products.each do |product| %>
+            <tr>
+              <td><%= product.title %></td>
+              <td><%= product.description %></td>
+              <td><%= product.price %></td>
+              <td><%= product.product_status %></td>
+              <td><%= link_to raw('<i class="fa-solid fa-eye fa-lg" style="color: #12e4f3;"></i>'), product_path(product), class: "btn m-0", title: "Show" %>
+              <%= link_to raw('<i class="fa-solid fa-pen-to-square fa-lg" style="color: #f4e32a;"></i>'), edit_product_path(product), class: "btn", title: "Edit" %>
+              <%= link_to raw('<i class="fa-solid fa-trash-can fa-lg" style="color: #f02828;"></i>'), product_path(product), class: "btn", title: "Remove", data: { turbo_method: :delete, turbo_confirm: :"Are You Sure?" } %>
+              <%= link_to "Order now!", new_product_order_path(product), class: "btn btn-info" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      
+      <div class="mt-5">
+        <%= link_to "Add", new_product_path, class: "btn btn-info me-3 px-3" %>
+        <%= link_to "Orders", orders_path, class: "btn btn-info" %>
+      </div>
+    <% else %>
+      <h1>Please Login to Continue</h1>
+    <% end %>
+  </div>
+</div>

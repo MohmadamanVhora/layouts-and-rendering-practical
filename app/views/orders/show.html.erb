@@ -1,0 +1,24 @@
+<div class="container justify-content-center my-5 col-4">
+  <table class="table table-bordered table-hover table-striped">
+    <tbody>
+      <tr>
+        <th class="col-3">Product</th>
+        <td><%= @order.product.title %></td>
+      </tr>
+      <tr>
+        <th class="col-3">Quantity</th>
+        <td><%= @order.quantity %></td>
+      </tr>
+      <tr>
+        <th class="col-3">Status</th>
+        <td><%= @order.order_status %></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="my-4">
+    <%= link_to raw('<i class="fa-solid fa-pen-to-square fa-2xl" style="color: #f4e32a;"></i>'), edit_product_order_path(@order.product_id, @order), :class => "btn", title: "Edit" %>
+    <%= link_to raw('<i class="fa-solid fa-trash-can fa-2xl" style="color: #f02828;"></i>'), product_order_path(@order.product_id, @order), data: { turbo_method: :delete, turbo_confirm: :"Are You Sure?" } %>
+    <%= link_to raw('<i class="fa-solid fa-list fa-2xl" style="color: #12e4f3;"></i>'), orders_path, :class => 'btn', title: "All" %>
+  </div>
+</div>
