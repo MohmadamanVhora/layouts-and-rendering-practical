@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  has_many :orders
+  has_many :orders, dependent: :destroy
 
   validates :title, presence: true
   validates :price, numericality: true, presence: true

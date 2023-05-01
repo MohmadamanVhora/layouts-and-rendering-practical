@@ -1,17 +1,4 @@
-<div class="d-flex justify-content-center">
-  <% if product.errors.any? %>    
-    <div class="alert alert-danger alert-dismissible fade show col-4" role="alert">            
-      <ul>        
-        <% product.errors.each do |error| %>          
-          <li>            
-            <%= error.full_message %>          
-          </li>        
-        <% end %>      
-      </ul>      
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>    
-    </div>  
-  <% end %>
-</div>
+<%= render "shared/error", model_name: product %>
 
 <div class="container text-center col-4">
   <%= form_with model: product do |form| %>

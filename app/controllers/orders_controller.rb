@@ -15,8 +15,8 @@ class OrdersController < ApplicationController
   end
 
   def create
-    product = Product.find(params[:product_id])
-    @order = product.orders.new(order_params)
+    @product = Product.find(params[:product_id])
+    @order = @product.orders.new(order_params)
     if @order.save
       redirect_to product_order_path(@order.product_id, @order)
     else
@@ -32,7 +32,7 @@ class OrdersController < ApplicationController
     product = Product.find(params[:product_id])
     @order = product.orders.find(params[:id])
     if @order.update(order_params)
-      redirect_to product_order_path(@order.product_id, @order.id)
+      redirect_to product_order_path(@order.product_id, @order)
     else
       render :edit, status: :unprocessable_entity
     end

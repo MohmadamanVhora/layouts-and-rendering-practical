@@ -1,20 +1,7 @@
-<div class="d-flex justify-content-center">
-  <% if order.errors.any? %>    
-    <div class="alert alert-danger alert-dismissible fade show col-4" role="alert">            
-      <ul>        
-        <% order.errors.each do |error| %>          
-          <li>            
-            <%= error.full_message %>          
-          </li>        
-        <% end %>      
-      </ul>      
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>    
-    </div>  
-  <% end %>
-</div>
+<%= render "shared/error", model_name: order %>
 
 <div class="container text-center col-4">
-  <%= form_for [@product, @order] do |form| %>
+  <%= form_for [@product, @order], url: path do |form| %>
     <div class="input-group mb-4">
       <%= form.label :quantity, class: "input-group-text" %>
       <%= form.number_field :quantity, class: "form-control", placeholder: "Enter How many products you want" %>

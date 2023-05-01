@@ -11,16 +11,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @orders.each do |order| %>
-            <tr>
-              <td><%= order.product.title %></td>
-              <td><%= order.quantity %></td>
-              <td><%= order.order_status %></td>
-              <td><%= link_to raw('<i class="fa-solid fa-eye fa-lg" style="color: #12e4f3;"></i>'), product_order_path(order.product_id, order), class: "btn m-0", title: "Show" %>
-              <%= link_to raw('<i class="fa-solid fa-pen-to-square fa-lg" style="color: #f4e32a;"></i>'), edit_product_order_path(order.product_id, order), class: "btn", title: "Edit" %>
-              <%= link_to raw('<i class="fa-solid fa-trash-can fa-lg" style="color: #f02828;"></i>'), product_order_path(order.product_id, order), class: "btn", title: "Remove", data: { turbo_method: :delete, turbo_confirm: :"Are You Sure?" } %></td>
-            </tr>
-          <% end %>
+          <%= render partial: "order", collection: @orders %>
         </tbody>
       </table>
       <%= link_to "Products", products_path, class: "btn btn-info mt-4 px-4" %>
