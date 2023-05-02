@@ -1,7 +1,7 @@
 <%= render "shared/error", model_name: order %>
 
 <div class="container text-center col-4">
-  <%= form_for [@product, @order], url: path do |form| %>
+  <%= form_for @order, url: path do |form| %>
     <div class="input-group mb-4">
       <%= form.label :quantity, class: "input-group-text" %>
       <%= form.number_field :quantity, class: "form-control", placeholder: "Enter How many products you want" %>

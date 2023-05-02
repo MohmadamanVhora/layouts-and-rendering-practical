@@ -1,7 +1,6 @@
 class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update, :destroy]
   before_action :check_admin, only: [:new, :create, :edit, :update, :destroy]
-  layout :theme_layout
 
   def index
     @products = Product.all
@@ -45,19 +44,9 @@ class ProductsController < ApplicationController
   def find_product
     @product = Product.find(params[:id])
   end
-
-  def theme_layout
-    if current_user&.Admin?
-      'admin'
-    elsif current_user&.Merchant?
-      'merchant'
-    else
-      'application'
-    end
-  end
-
+  
   def check_admin
-    unless current_user&.Admin?
+    unless current_user.Admin?
       redirect_to products_path, alert: "You do not have permission to perform this action."
     end
   end
