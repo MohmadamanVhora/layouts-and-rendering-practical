@@ -1,0 +1,29 @@
+<div class="container justify-content-center mt-5 text-center">
+  <%= form_with url: search_path, method: :get, class: "form-inline" do |form| %>
+    <div class="input-group mb-3"> 
+      <%= form.text_field :query, class: 'form-control mr-sm-2', placeholder: 'Search Employees by Name'%> 
+      <%= form.submit "Search", class: 'btn btn-outline-success my-2 my-sm-0' %>
+    </div> 
+  <% end %>
+
+  <div style="height:400px; overflow:auto;">
+    <table class="table table-bordered container table-hover table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: "employee", collection: @employees %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mt-5">
+    <%= link_to "Add", new_employee_path, class: "btn btn-info me-3 px-3" %>
+  </div>
+</div>
