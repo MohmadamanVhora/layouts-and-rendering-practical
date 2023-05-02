@@ -18,7 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_065523) do
     t.string "house_name"
     t.string "street_name"
     t.string "road"
-    t.bigint "employee_id", null: false
+    t.integer "employee_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["employee_id"], name: "index_addresses_on_employee_id"
@@ -32,17 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_065523) do
     t.string "mobile_number"
     t.date "birth_date"
     t.string "document"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "employees_hobbies", id: false, force: :cascade do |t|
-    t.bigint "employee_id", null: false
-    t.bigint "hobby_id", null: false
-  end
-
-  create_table "hobbies", force: :cascade do |t|
-    t.string "name"
+    t.string "hobbies"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

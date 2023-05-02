@@ -1,0 +1,81 @@
+<%= render "shared/error", model_name: employee %>
+
+<div class="container w-50">
+  <%= form_with model: employee do |form| %>
+    <div class="mb-4">
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, class: "form-control", placeholder: "Enter Name" %>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label :email, class: "form-label" %>
+      <%= form.email_field :email, class: "form-control", placeholder: "Enter Email" %>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label :password, class: "form-label" %>
+      <%= form.password_field :password, class: "form-control", placeholder: "Enter Password" %>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label 'Birth date', class: "form-label" %>
+      <%= form.date_field :birth_date, class: "form-control" %>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label "Gender:", class: "form-label me-3" %>
+
+      <%= form.radio_button :gender, class: "form-control" %>
+      <%= form.label 'Male' %>
+
+      <%= form.radio_button :gender, class: "form-control" %>
+      <%= form.label 'Female' %>
+    </div>
+
+    <div class="mb-4">
+      Hobbies:
+      <ul>
+        <%= form.collection_check_boxes :hobby_ids, Hobby.all, :id, :name do |b| %>
+          <div>
+            <%= b.check_box %>
+            <%= b.label %>
+          </div>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="mb-4">
+      Addresses:
+      <ul>
+        <%= form.fields_for :addresses, @address do |address_form| %>
+          <div class="mb-4">
+            <%= address_form.label "House Name", class: "form-label" %>
+            <%= address_form.text_field :house_name, class: "form-control", placeholder: "Enter House Name" %>
+          </div>
+          
+          <div class="mb-4">
+            <%= address_form.label "Street Name", class: "form-label" %>
+            <%= address_form.text_field :street_name, class: "form-control", placeholder: "Enter Street Name" %>
+          </div>
+
+          <div class="mb-4">
+            <%= address_form.label :road, class: "form-label" %>
+            <%= address_form.text_field :road, class: "form-control", placeholder: "Enter Road Name" %>
+          </div>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label "Mobile Number", class: "form-label" %>
+      <%= form.number_field :mobile_number, class: "form-control", placeholder: "Enter Mobile Number" %>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label :document, class: "form-label" %>
+      <%= form.file_field :document, class: "form-control" %>
+    </div>
+
+    <%= form.submit value: text, class: 'btn btn-info px-3 mb-3' %>
+  <% end %>
+</div>
