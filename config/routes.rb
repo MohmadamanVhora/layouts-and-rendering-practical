@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  default_url_options :host => "example.com"
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  devise_for :users
+  
+  root "products#index"
+  resources :products do
+    resources :orders, except: [:index]
+  end
+  resources :orders, only: :index
 end

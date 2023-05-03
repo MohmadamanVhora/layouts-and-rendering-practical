@@ -1,0 +1,16 @@
+<tr>
+  <td><%= product.title %></td>
+  <td><%= product.description %></td>
+  <td><%= product.price %></td>
+  <td><%= product.product_status %></td>
+  <td>
+    <% if current_user.Admin? %>
+      <%= link_to raw('<i class="fa-solid fa-eye fa-lg" style="color: #12e4f3;"></i>'), product_path(product), class: "btn m-0", title: "Show" %>
+      <%= link_to raw('<i class="fa-solid fa-pen-to-square fa-lg" style="color: #f4e32a;"></i>'), edit_product_path(product), class: "btn", title: "Edit" %>
+      <%= link_to raw('<i class="fa-solid fa-trash-can fa-lg" style="color: #f02828;"></i>'), product_path(product), class: "btn", title: "Remove", data: { turbo_method: :delete, turbo_confirm: :"Are You Sure?" } %>
+      <%= link_to "Order now!", new_product_order_path(product), class: "btn btn-info" %>
+    <% else %>
+      <%= link_to raw('<i class="fa-solid fa-eye fa-lg" style="color: #12e4f3;"></i>'), product_path(product), class: "btn m-0", title: "Show" %>
+    <% end %>
+  </td>
+</tr>

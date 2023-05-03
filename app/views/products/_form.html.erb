@@ -1,0 +1,27 @@
+<%= render "shared/error", model_name: product %>
+
+<div class="container text-center col-4">
+  <%= form_with model: product do |form| %>
+    <div class="input-group mb-4">
+      <%= form.label :title, class: "input-group-text" %>
+      <%= form.text_field :title, class: "form-control", placeholder: "Enter Title" %>
+    </div>
+
+    <div class="input-group mb-4">
+      <%= form.label :description, class: "input-group-text" %>
+      <%= form.text_field :description, class: "form-control", placeholder: "Enter Description" %>
+    </div>
+
+    <div class="input-group mb-4">
+      <%= form.label :price, class: "input-group-text" %>
+      <%= form.number_field :price, min: 0, class: "form-control", placeholder: "Enter Price" %>
+    </div>
+
+    <div class="input-group mb-4">
+      <%= form.label 'Status', class: "input-group-text" %>
+      <%= form.select :product_status, Product.statuses, { include_blank: 'Select Status' }, class: "form-control" %>
+    </div>
+
+    <%= form.submit value: text, class: 'btn btn-info px-3' %>
+  <% end %>
+</div>

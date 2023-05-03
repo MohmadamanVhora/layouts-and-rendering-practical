@@ -1,0 +1,14 @@
+<div class="d-flex justify-content-center">
+  <% if model_name.errors.any? %>    
+    <div class="alert alert-danger alert-dismissible fade show col-4" role="alert">            
+      <ul>        
+        <% model_name.errors.each do |error| %>          
+          <li>            
+            <%= error.full_message %>          
+          </li>        
+        <% end %>      
+      </ul>      
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>    
+    </div>  
+  <% end %>
+</div>
