@@ -18,7 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_065523) do
     t.string "house_name"
     t.string "street_name"
     t.string "road"
-    t.integer "employee_id", null: false
+    t.bigint "employee_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["employee_id"], name: "index_addresses_on_employee_id"
@@ -28,7 +28,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_065523) do
     t.string "name"
     t.string "email"
     t.string "password"
-    t.boolean "gender"
+    t.integer "gender"
     t.string "mobile_number"
     t.date "birth_date"
     t.string "document"

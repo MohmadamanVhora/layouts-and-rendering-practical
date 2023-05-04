@@ -8,4 +8,10 @@ Rails.application.routes.draw do
     resources :orders, except: [:index]
   end
   resources :orders, only: :index
+  # Defines the root path route ("/")
+  # root "articles#index"
+  root "employees#index"
+  resources :employees do
+    get "/search", to: "employees#search", on: :collection
+  end
 end
