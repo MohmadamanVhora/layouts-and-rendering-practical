@@ -2,14 +2,14 @@ class EmployeesController < ApplicationController
   before_action :find_employee, only: [:show, :edit, :update, :destroy]
 
   def index
-    @employees = Employee.all    
+    @employees = Employee.all
   end
 
   def show; end
 
   def new
     @employee = Employee.new
-    @address = Address.new
+    @employee.addresses.new
   end
 
   def create
@@ -38,12 +38,13 @@ class EmployeesController < ApplicationController
 
   def search
     @employees = Employee.where("lower(name) LIKE ?", "%#{params[:query].downcase}%")
+    render :index
   end
 
   private
 
   def employee_params
-    params.require(:employee).permit(:name, :email, :password, :gender , :mobile_number, :birth_date, :document, :hobby_ids, addresses_attributes: [:house_name, :street_name, :road])
+    params.require(:employee).permit(:name, :email, :password, :gender , :mobile_number, :birth_date, :document, hobbies: [], addresses_attributes: [:id, :house_name, :street_name, :road])
   end
 
   def find_employee
