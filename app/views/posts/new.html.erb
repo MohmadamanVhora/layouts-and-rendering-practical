@@ -1,0 +1,5 @@
+<div class="container w-50 mt-4">
+  <%= turbo_frame_tag @post do %>
+    <%= render "form", post: @post, text: "New" %>
+  <% end %>
+</div>

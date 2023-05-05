@@ -11,5 +11,8 @@ Rails.application.routes.draw do
   
   resources :employees do
     get "/search", to: "employees#search", on: :collection
+
+  resources :posts do
+    resources :comments
   end
 end

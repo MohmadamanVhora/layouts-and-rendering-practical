@@ -1,0 +1,22 @@
+<%= render "shared/error", model_name: post %>
+
+<div class="container border border-secondary rounded-1 p-3 mt-4">
+  <h3 class="mb-1"><%= text %></h3>
+  <%= form_with model: post do |form| %>
+    <div class="mb-4">
+      <%= form.label :title, class: "form-label" %>
+      <%= form.text_field :title, class: "form-control", placeholder: "Enter Title" %>
+    </div>
+    
+    <div class="mb-4">
+      <%= form.label :description, class: "form-label" %>
+      <%= form.text_field :description, class: "form-control", placeholder: "Enter Discription" %>
+    </div>
+
+    <%= form.hidden_field :user_id, value: current_user.id %>
+
+    <%= link_to raw('<i class="fa-solid fa-xmark" style="color: white;"></i>'), posts_path, class: 'btn btn-danger rounded-1 px-3 me-3' %>
+
+    <%= form.button raw('<i class="fa-solid fa-check" style="color: white;"></i>'), class: 'btn btn-success rounded-1 px-3' %>
+  <% end %>
+</div>
