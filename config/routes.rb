@@ -8,4 +8,8 @@ Rails.application.routes.draw do
     resources :orders, except: [:index]
   end
   resources :orders, only: :index
+  
+  resources :employees do
+    get "/search", to: "employees#search", on: :collection
+  end
 end

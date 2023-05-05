@@ -1,0 +1,24 @@
+<div class="container justify-content-center mt-5 text-center">
+  <%= render 'search' %>
+  <div style="height:400px; overflow:auto;">
+    <table class="table container table-hover table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Mobile Number</th>
+          <th>Birth Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render @employees %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mt-5">
+    <%= link_to "Add", new_employee_path, class: "btn btn-info me-3 px-3" %>
+    <%= link_to "All", employees_path, class: "btn btn-info px-3" %>
+  </div>
+</div>
