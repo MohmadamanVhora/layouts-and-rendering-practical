@@ -25,11 +25,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_05_132842) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.string "comment"
+    t.text "comment"
     t.bigint "post_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "employees", force: :cascade do |t|
@@ -96,6 +98,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_05_132842) do
 
   add_foreign_key "addresses", "employees"
   add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "users"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
   add_foreign_key "orders", "products"

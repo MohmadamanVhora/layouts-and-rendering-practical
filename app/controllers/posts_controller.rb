@@ -1,12 +1,10 @@
 class PostsController < ApplicationController
-  before_action :find_post, only: %i[show edit update destroy]
-  before_action :check_user, only: [:edit, :destroy]
+  before_action :find_post, only: %i[edit update destroy like dislike]
+  before_action :check_user, only: %i[edit destroy]
 
   def index
     @posts = Post.all
   end
-
-  def show; end
 
   def new
     @post = Post.new
@@ -28,7 +26,10 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      redirect_to posts_path
+      respond_to do |format|
+        format.html { redirect_to posts_path }
+        format.turbo_stream
+      end
     else
       render :edit, status: :unprocessable_entity
     end
@@ -42,6 +43,16 @@ class PostsController < ApplicationController
     end
   end
   
+  def like
+    @post.likes.create(user_id: current_user.id)
+    redirect_to posts_path
+  end
+  
+  def dislike
+    @post.likes.find_by(user_id: current_user.id).destroy
+    redirect_to posts_path
+  end
+
   private
 
   def find_post
@@ -53,7 +64,7 @@ class PostsController < ApplicationController
   end
 
   def check_user
-    if @post.user_id != current_user.id
+    if @post.user != current_user
       flash[:alert] = "You can not edit this post"
       redirect_to posts_path
     end

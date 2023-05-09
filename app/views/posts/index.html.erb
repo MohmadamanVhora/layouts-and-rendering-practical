@@ -1,8 +1,8 @@
-<div class="container mt-5 w-50">
-  <% if current_user.present? %>
+<div class="container mt-5" style="width: 600px;">
+  <%= turbo_frame_tag "main_frame" do %>
     <div class="d-flex justify-content-between">
       <h3 class="pt-2 m-0">Posts</h3>
-      <%= link_to "New Post", new_post_path, data: { turbo_frame: dom_id(Post.new) }, class: "btn btn-success rounded-1" %>
+      <%= link_to raw('<i class="fa-regular fa-square-plus"></i> Add'), new_post_path, data: { turbo_frame: dom_id(Post.new) }, class: "btn btn-success rounded-1 py-auto" %>
     </div>
     <hr>
 
@@ -11,7 +11,5 @@
     <%= turbo_frame_tag "posts" do %>
       <%= render @posts %>
     <% end %>
-  <% else %>
-    <h1>Please Login to Continue</h1>
   <% end %>
 </div>

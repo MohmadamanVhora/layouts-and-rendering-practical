@@ -3,14 +3,27 @@
     <div>
       <p class="m-0 fs-4"><strong>Title:</strong> <%= post.title %></p>
       <p class="m-0 fs-6"><strong>Description:</strong> <%= post.description %></p>
-      <p class="m-0 fs-6"><strong>Date:</strong> <%= post.created_at %></p>
+      <p class="m-0 fs-6"><strong>Date:</strong> <%= post.created_at.to_date %></p>
     </div>
 
-    <div class="text-end mt-2">
-      <% if post.user_id == current_user.id %>
-        <%= link_to raw('<i class="fa-solid fa-trash-can"></i>'), post_path(post),  method: :delete, class: "btn btn-danger rounded-1 me-3 p" %>
-        <%= link_to raw('<i class="fa-solid fa-pen-to-square" style="color: white;"></i>'), edit_post_path(post), class: "btn btn-warning rounded-1" %>
-      <% end %>
+    <div class="d-flex justify-content-between mt-2">
+      <div class="d-flex">
+        <% if post_liked(post) %>
+          <%= link_to raw('<i class="fa-solid fa-thumbs-up fa-xl"></i>'), dislike_post_path(post), class: "btn pt-2" %>
+        <% else %>
+          <%= link_to raw('<i class="fa-regular fa-thumbs-up fa-xl"></i>'), like_post_path(post), class: "btn pt-2" %>
+        <% end %>
+        <p class="mt-1 mb-0 fs-4"><%= post.likes.count %></p>
+        <%= link_to raw('<i class="fa-regular fa-comments fa-xl"></i>'), post_comments_path(post), data: { turbo_frame: "main_frame" }, class: "btn pt-2 ms-3" %>
+        <p class="mt-1 mb-0 fs-4"><%= post.comments.count %></p>
+      </div>
+
+      <div class="text-end">
+        <% if user_authenticate(post) %>
+          <%= link_to raw('<i class="fa-solid fa-trash-can"></i>'), post_path(post), data: { turbo_method: "delete", turbo_confirm: "Are you sure?" }, class: "btn btn-danger rounded-1 me-3" %>
+          <%= link_to raw('<i class="fa-solid fa-pen-to-square" style="color: white;"></i>'), edit_post_path(post), data: { turbo_frame: dom_id(post) }, class: "btn btn-warning rounded-1" %>
+        <% end %>
+      </div>
     </div>
   </div>
 <% end %>
