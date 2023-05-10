@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
   include ActionView::Layouts
   layout :theme_layout
-  before_action :require_login, except: [:new, :create]
+  before_action :require_login
+  skip_before_action :require_login, if: :devise_controller?
   before_action :configure_permitted_parameters, if: :devise_controller?
   
   protected
