@@ -1,0 +1,3 @@
+<%= turbo_frame_tag @comment do %>
+  <%= render "form", comment: @comment, action: post_comment_path(@post.id, @comment.id), text: "Edit" %>
+<% end %>

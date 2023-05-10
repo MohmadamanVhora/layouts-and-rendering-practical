@@ -12,4 +12,12 @@ Rails.application.routes.draw do
   resources :employees do
     get "/search", to: "employees#search", on: :collection
   end
+  
+  resources :posts, except: :show do
+    resources :comments, except: :show
+    member do
+      post 'like'
+      delete 'dislike'
+    end
+  end
 end

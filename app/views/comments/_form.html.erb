@@ -1,0 +1,17 @@
+<%= render "shared/error", model_name: comment %>
+
+<div class="container border border-secondary rounded-1 p-3 mt-4">
+  <h3 class="mb-1"><%= text %></h3>
+  <%= form_with model: comment, url: action do |form| %>
+    <div class="mb-4">
+      <%= form.label :comment, class: "form-label" %>
+      <%= form.text_field :comment, class: "form-control", placeholder: "Enter Comment" %>
+    </div>
+    
+    <%= form.hidden_field :post_id, value: @post.id %>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+
+    <%= link_to raw('<i class="fa-solid fa-xmark" style="color: white;"></i>'), post_comments_path(@post), class: 'btn btn-danger rounded-1 px-3 me-3' %>
+    <%= form.button raw('<i class="fa-solid fa-check" style="color: white;"></i>'), class: 'btn btn-success rounded-1 px-3' %>
+  <% end %>
+</div>
