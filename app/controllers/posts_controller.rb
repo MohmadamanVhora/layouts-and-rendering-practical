@@ -45,12 +45,18 @@ class PostsController < ApplicationController
   
   def like
     @post.likes.create(user_id: current_user.id)
-    redirect_to posts_path
+    respond_to do |format|
+      format.html { redirect_to posts_path }
+      format.turbo_stream { render turbo_stream: turbo_stream.replace(@post) }
+    end
   end
   
   def dislike
     @post.likes.find_by(user_id: current_user.id).destroy
-    redirect_to posts_path
+    respond_to do |format|
+      format.html { redirect_to posts_path }
+      format.turbo_stream { render turbo_stream: turbo_stream.replace(@post) }
+    end
   end
 
   private
